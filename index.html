@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>The Chronicles of Neuralia — A Fantasy Adventure About How AI Really Works</title>
+<meta name="description" content="A children's book that teaches AI through a fantasy adventure. 17 chapters, 19 illustrations. For ages 6–12.">
+<link rel="canonical" href="https://hiddenartifice.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
+<style>
+:root{
+  --bg:#0c0a08;--cream:#fdf8ed;--gold:#c49a2a;--gold-dim:rgba(196,154,42,.35);
+  --red:#9b2335;--green:#2a6b48;--text-light:#d4c8b0;--text-dim:#8a7d6b;
+  --ch-bg:rgba(255,255,255,.015);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:60px}
+body{background:var(--bg);color:var(--cream);font-family:'Lora',Georgia,serif;
+     font-size:18px;line-height:1.85;-webkit-font-smoothing:antialiased;
+     overflow-x:hidden}
+
+/* ─ Progress bar ─ */
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--red));
+          width:0%;z-index:1000;transition:width .15s ease-out}
+
+/* ─ TOC sidebar ─ */
+.toc-toggle{position:fixed;top:14px;left:14px;z-index:999;background:rgba(12,10,8,.85);
+            border:1px solid var(--gold-dim);color:var(--gold);font-family:'Cinzel',serif;
+            font-size:12px;padding:8px 14px;border-radius:6px;cursor:pointer;
+            backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);letter-spacing:2px;
+            transition:all .3s ease}
+.toc-toggle:hover{background:var(--gold);color:var(--bg)}
+.toc{position:fixed;top:0;left:-320px;width:300px;height:100vh;background:rgba(12,10,8,.96);
+     border-right:1px solid var(--gold-dim);z-index:998;padding:70px 24px 30px;
+     overflow-y:auto;transition:left .35s cubic-bezier(.4,0,.2,1);
+     backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.toc.open{left:0}
+.toc a{display:block;color:var(--text-dim);text-decoration:none;font-size:14px;
+       padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);
+       font-family:'Lora',serif;transition:color .2s,padding-left .2s}
+.toc a:hover,.toc a.active{color:var(--gold);padding-left:8px}
+.toc a .tnum{font-family:'Cinzel',serif;font-size:11px;color:var(--gold-dim);
+             margin-right:6px;letter-spacing:1px}
+
+/* ─ Book layout ─ */
+.book{max-width:720px;margin:0 auto;padding:20px 24px 60px}
+
+/* ─ Cover ─ */
+.cover{text-align:center;padding:80px 20px 60px;border-bottom:3px double var(--gold);
+       margin-bottom:50px;opacity:0;animation:fadeUp .8s ease forwards}
+.cover .brand{font-family:'Cinzel',serif;font-size:12px;color:var(--gold);
+              letter-spacing:4px;text-transform:uppercase;opacity:.7;margin-bottom:10px}
+.cover h1{font-family:'Cinzel Decorative',serif;font-size:clamp(28px,6vw,52px);
+          font-weight:700;line-height:1.15;margin-bottom:6px;
+          background:linear-gradient(135deg,var(--gold),#e8d5a3,var(--gold));
+          -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+          background-clip:text}
+.cover .sub{font-family:'Cinzel',serif;font-size:clamp(13px,2.5vw,17px);
+            color:var(--gold);letter-spacing:3px;margin-bottom:24px;font-style:italic}
+.cover .epi{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;
+            color:var(--text-dim);max-width:440px;margin:0 auto}
+
+/* ─ Chapters ─ */
+.ch{margin-bottom:60px;padding:30px 0;opacity:0;transform:translateY(30px);
+    transition:opacity .6s ease,transform .6s ease}
+.ch.visible{opacity:1;transform:translateY(0)}
+.ch-img{width:100%;max-height:60vh;object-fit:cover;border-radius:8px;margin-bottom:24px;
+        display:block;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.ch-img.portrait{object-fit:contain;max-height:75vh;max-width:65%;margin-left:auto;
+        margin-right:auto;background:transparent}
+.ch-head{text-align:center;margin-bottom:26px}
+.ch-head .num{font-family:'Cinzel',serif;font-size:11px;letter-spacing:5px;
+              text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px}
+.ch-head h2{font-family:'Cinzel',serif;font-size:clamp(20px,4.5vw,32px);
+            font-weight:700;line-height:1.25}
+
+/* ─ Prose ─ */
+.prose{font-size:18px;line-height:1.85;color:var(--text-light)}
+.prose p{margin-bottom:14px}
+.prose p:first-of-type::first-letter{font-family:'Cinzel Decorative',serif;font-size:3.2em;
+        float:left;line-height:.78;margin:6px 12px 0 0;color:var(--red)}
+.prose .n{font-family:'Cinzel',serif;font-weight:600;font-size:.92em;color:var(--gold)}
+.prose .floating-text{text-align:center;font-size:20px;color:var(--gold);
+                      font-style:italic;margin:12px 0 16px}
+
+/* ─ Tech boxes ─ */
+.learn{background:rgba(255,255,255,.04);border-left:3px solid var(--gold);
+       border-radius:0 8px 8px 0;padding:18px 20px;margin:26px 0;
+       font-size:15px;line-height:1.65;color:var(--text-dim)}
+.learn .lbl{font-family:'Cinzel',serif;font-weight:700;color:var(--gold);
+            font-size:13px;display:block;margin-bottom:6px}
+.learn .kid{color:var(--text-light);font-weight:500;display:block;margin-bottom:6px}
+.learn .deep{font-size:13px;color:var(--text-dim);border-top:1px dashed rgba(255,255,255,.1);
+             padding-top:6px;margin-top:6px}
+
+/* ─ Dividers ─ */
+.divider{text-align:center;padding:30px 0;color:var(--gold);font-size:15px;
+         letter-spacing:14px;opacity:.35}
+
+/* ─ Character map ─ */
+.map{background:rgba(196,154,42,.06);border:1px solid rgba(196,154,42,.15);
+     border-radius:12px;padding:32px 24px;margin:50px 0}
+.map h3{font-family:'Cinzel',serif;color:var(--gold);font-size:19px;
+        text-align:center;margin-bottom:20px}
+.map-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;font-size:13px}
+.m-i{display:flex;gap:6px;align-items:baseline;opacity:.35;transition:opacity .5s ease}
+.m-i.lit{opacity:1}
+.m-c{color:var(--gold);font-family:'Cinzel',serif;font-weight:600;font-size:12px}
+.m-r{color:var(--text-dim);font-size:12px}
+
+/* ─ Finale ─ */
+.fin{text-align:center;padding:50px 0 30px;border-top:3px double var(--gold);margin-top:50px}
+.fin .word{font-family:'Cinzel Decorative',serif;font-size:30px;color:var(--gold);letter-spacing:6px}
+.fin .note{font-style:italic;font-size:13px;color:var(--text-dim);margin-top:10px}
+
+/* ─ Animations ─ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─ Mobile ─ */
+@media(max-width:600px){
+  .book{padding:16px 18px 40px}
+  .prose{font-size:17px}
+  .map-grid{grid-template-columns:1fr}
+  .toc{width:85vw;left:-85vw}
+  .cover{padding:60px 16px 40px}
+  .ch{padding:20px 0}
+  .ch-img.portrait{max-width:85%}
+}
+
+/* ─ Paywall CTA ─ */
+.paywall{text-align:center;padding:60px 24px;margin:40px 0;position:relative;
+         background:rgba(196,154,42,.04);border:1px solid rgba(196,154,42,.2);border-radius:16px;
+         overflow:hidden}
+.pw-glow{position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:300px;height:300px;
+         background:radial-gradient(circle,rgba(196,154,42,.15),transparent 70%);pointer-events:none}
+.paywall h3{font-family:'Cinzel Decorative',serif;font-size:clamp(22px,5vw,34px);color:var(--gold);
+            margin-bottom:16px;position:relative}
+.pw-text{color:var(--text-light);font-size:16px;max-width:480px;margin:0 auto 14px;line-height:1.7;position:relative}
+.buy-btn{display:inline-block;background:linear-gradient(135deg,var(--gold),#d4a83a);color:var(--bg);
+         font-family:'Cinzel',serif;font-weight:700;font-size:18px;padding:16px 36px;border-radius:8px;
+         text-decoration:none;letter-spacing:1px;transition:all .3s ease;position:relative;
+         box-shadow:0 4px 20px rgba(196,154,42,.3)}
+.buy-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(196,154,42,.45)}
+.pw-note{font-size:12px;color:var(--text-dim);margin-top:14px;position:relative}
+
+/* ─ Header nav for landing ─ */
+.lp-nav{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;
+        max-width:720px;margin:0 auto}
+.lp-nav .logo{font-family:'Cinzel',serif;font-size:13px;color:var(--gold);letter-spacing:3px;
+              text-transform:uppercase;opacity:.8}
+.lp-nav .nav-buy{color:var(--gold);font-family:'Cinzel',serif;font-size:12px;
+                 text-decoration:none;letter-spacing:2px;padding:6px 14px;
+                 border:1px solid var(--gold-dim);border-radius:4px;transition:all .2s}
+.lp-nav .nav-buy:hover{background:var(--gold);color:var(--bg)}
+</style>
+</head><body>
+<nav class="lp-nav">
+  <span class="logo">The Hidden Layers</span>
+  <a class="nav-buy lemonsqueezy-button" href="https://thehiddenlayers.lemonsqueezy.com/checkout/buy/f05930e5-dc31-411d-80a7-91aa27341e20?embed=1">Get Full Book</a>
+</nav>
+<div class="book">
+<div class="cover">
+  <div class="brand">The Hidden Layers presents</div>
+  <h1>The Chronicles of Neuralia</h1>
+  <div class="sub">A Fantasy Adventure About How AI Really Works</div>
+  <div class="epi">For every child who has ever asked:<br><em>"But how does the computer know that?"</em></div>
+</div>
+<p style="text-align:center;font-family:'Cinzel',serif;font-size:13px;color:var(--gold);letter-spacing:2px;margin-bottom:40px;opacity:.6">— READ THE FIRST 3 CHAPTERS FREE —</p>
+<div class="ch" id="ch1" data-ch="0">
+<img class="ch-img" src="img/ch01.jpg" alt="The Girl Who Asked Too Many Questions" loading="lazy">
+<div class="ch-head"><span class="num">Chapter One</span><h2>The Girl Who Asked Too Many Questions</h2></div>
+<div class="prose"><p>Aria Sparks was the kind of girl who could not stop asking questions. She asked why the sky was blue at breakfast and why cats purr at dinner. She asked her teacher how calculators think, and when the teacher said "they just do," Aria frowned and said, <em>"That's not really an answer, is it?"</em></p>
+
+<p>Her bedroom was a mess of half-finished experiments: a cardboard robot that was supposed to walk (it didn't), a jar full of magnets stuck to a spoon, and seventeen library books with bookmarks poking out at odd angles. Her mother called it a "curiosity hurricane." Aria called it research.</p>
+
+<p>One rainy Tuesday, Aria was sitting at her computer, talking to an AI chatbot for a school project. She had already asked it to write a poem (it did), explain black holes (it tried), and translate "hello" into twelve languages (it nailed it). But one question kept nagging her.</p>
+
+<p>She typed: <em>"How do you actually work?"</em></p>
+
+<p>For a moment, nothing happened. Then the cursor blinked twice — which was strange, because cursors only blink once. The letters on the screen dissolved into gold dust. Aria leaned closer. The dust swirled faster and faster, and before she could call for her mum, it shaped itself into a door — a shimmering, glowing door — right there inside her screen.</p>
+
+<p>A voice spoke from behind it. It was warm and calm, like a librarian who has all the time in the world.</p>
+
+<p><em>"Nobody ever asks that,"</em> said the voice. <em>"They ask me to do things. Write this. Explain that. But how I work? You might be the first."</em></p>
+
+<p><em>"So… will you tell me?"</em> asked Aria, her nose almost touching the screen.</p>
+
+<p><em>"Better than that. Would you like to come in and see for yourself?"</em></p>
+
+<p>Aria — being Aria — did not hesitate. She reached toward the screen. Her fingers went <em>through</em> it, like pushing through warm honey. The room behind her — the messy desk, the jar of magnets, the rain on the window — faded to silence. And then she was falling, gently, like a leaf in autumn, into a kingdom made of light.</p></div>
+</div>
+<div class="divider">· · ✦ · ·</div>
+<div class="ch" id="ch2" data-ch="1">
+<img class="ch-img" src="img/ch02.jpg" alt="The Kingdom of the Hidden Layers" loading="lazy">
+<div class="ch-head"><span class="num">Chapter Two</span><h2>The Kingdom of the Hidden Layers</h2></div>
+<div class="prose"><p>She landed softly on a hill of warm glass and looked around. What she saw took her breath away.</p>
+
+<p>The <span class="n">Kingdom of the Hidden Layers</span> stretched out in every direction — millions of tiny glowing dots, like fireflies frozen in place, connected by thin golden threads. They pulsed with light, sending tiny sparks to each other. The dots were stacked in rows, layer upon layer, reaching up so high they disappeared into the clouds. The air hummed with a sound like a thousand harps playing a single note.</p>
+
+<p>Aria reached out and touched one of the golden threads. It vibrated under her finger, and for a split second, she felt something — a flash of the word <em>"ocean,"</em> a feeling of blue, a taste of salt. She pulled her hand back, startled.</p>
+
+<p><em>"Careful,"</em> said a voice behind her. <em>"Those threads carry meaning."</em></p>
+
+<p>A figure stepped out from behind a pillar of light. He was tall and kind-looking, wearing silver armour that shimmered like liquid metal. His golden helmet had a visor that glowed like a sunrise, and when he moved, tiny sparks trailed behind him like footprints.</p>
+
+<p><em>"Those dots you see are <span class="n">neurons</span>,"</em> he said. <em>"The building blocks of this kingdom. Each one takes in a signal, decides how important it is, and passes it on. One neuron alone is nothing — just a tiny light. But together, millions of them? They can learn to understand almost anything."</em></p>
+
+<p>Aria looked out at the vast landscape of lights. <em>"It looks like a city,"</em> she whispered.</p>
+
+<p><em>"That's not a bad comparison,"</em> said the knight. <em>"Except no one designed the roads. The neurons built them by learning — trying, failing, adjusting, trying again. Over and over, billions of times."</em></p>
+
+<p><em>"Who are you?"</em> asked Aria.</p>
+
+<p><em>"My name is <span class="n">Transformer</span>,"</em> said the knight, placing a hand on his chest plate where a symbol glowed: an eye inside a triangle. <em>"I am going to show you how everything works. But we must hurry. Something terrible is happening in the kingdom, and I need someone brave enough to understand it."</em></p>
+
+<p><em>"Terrible?"</em> Aria's eyes widened.</p>
+
+<p>Transformer looked toward the horizon, where the glow of the neurons faded into something darker — a faint purple haze. <em>"There are forces here that twist words into lies and freeze learning into memorisation. You'll see. But first — you need to understand how I see."</em></p></div>
+<div class="learn"><span class="lbl">🔍 Neural Network</span><span class="kid">👦 A neural network is millions of tiny 'brain cells' connected by wires. Each cell receives a message, decides how important it is, and passes it to the next one. Stack enough in layers, and they learn to recognise pictures, understand words, and write stories.</span><span class="deep">🧠 An ANN has input, hidden, and output layers. Each connection has a weight; each neuron applies an activation function (ReLU, GELU). Deep Learning = many hidden layers.</span></div>
+</div>
+<div class="divider">· · ✦ · ·</div>
+<div class="ch" id="ch3" data-ch="2">
+<img class="ch-img portrait" src="img/ch03.jpg" alt="The Knight Who Could See Everything at Once" loading="lazy">
+<div class="ch-head"><span class="num">Chapter Three</span><h2>The Knight Who Could See Everything at Once</h2></div>
+<div class="prose"><p>As they walked through glowing fields, Transformer explained why he was different from the warriors who came before him.</p>
+
+<p><em>"Once upon a time, this kingdom was protected by the <span class="n">Recurrent Knights</span>. They were brave, but they had a terrible weakness: they read sentences one word at a time, like reading a book through a keyhole. By the time they got to the end of a sentence, they had forgotten the beginning."</em></p>
+
+<p>He stopped walking and pointed to a row of old, rusted suits of armour standing by the roadside — monuments to the old guard. Each one held a single word on its shield: <em>THE… CAT… SAT… ON… THE…</em></p>
+
+<p><em>"See? By the time the last knight reads 'MAT,' the first knight has already forgotten 'CAT.' Long sentences were a nightmare. Long documents? Impossible."</em></p>
+
+<p>He tapped his golden helmet. <em>"But I have something they never did: <span class="n">the Eye of Attention</span>."</em></p>
+
+<p>He lowered his visor. The world around them changed. In the air, a sentence appeared in floating golden letters:</p>
+
+<p class="floating-text">"The dog chased the cat because <strong>it</strong> was fast."</p>
+
+<p>Lines of light shot from the word <strong>"it"</strong> in every direction. A thin, faint line connected to "dog." A blazing, thick golden beam connected to <strong>"cat."</strong> Smaller threads reached out to "chased" and "fast."</p>
+
+<p><em>"I can see every word at once,"</em> said Transformer, <em>"and I can tell which ones are connected to which. That word 'it' — a Recurrent Knight would guess. I <strong>know</strong> it means the cat."</em></p>
+
+<p>Aria walked around the floating sentence, touching the golden beams. Each one vibrated at a different frequency — the strong connections hummed low and loud, the weak ones barely whispered.</p>
+
+<p><em>"How many connections can you see at once?"</em></p>
+
+<p><em>"All of them. In fact, I look at the sentence through multiple lenses — we call them Heads. Each Head notices different patterns. One notices grammar. One notices meaning. One notices emotion."</em></p>
+
+<p>Aria grinned. <em>"Like having eight pairs of glasses, each showing something different?"</em></p>
+
+<p>Transformer laughed — a warm, ringing laugh. <em>"That is the best explanation I have ever heard. I'm keeping that one."</em></p></div>
+<img class="ch-img portrait" src="img/ch03b.jpg" alt="" loading="lazy" style="margin-top:18px">
+<div class="learn"><span class="lbl">🔍 Transformer & Self-Attention</span><span class="kid">👦 Old AI models read one word at a time and forgot things. The Transformer looks at ALL the words at once and draws lines between the connected ones. It uses three questions — Query, Key, Value — to decide what's important.</span><span class="deep">🧠 Self-Attention: scores = softmax(QK^T/√d_k) · V. Multi-Head Attention runs h parallel heads. Core of GPT, Claude, Gemini.</span></div>
+</div>
+<div class="divider">· · ✦ · ·</div>
+
+
+<div class="paywall" id="buy">
+  <div class="pw-glow"></div>
+  <h3>The adventure continues…</h3>
+  <p class="pw-text">Chapters 4–17 await: Tokens, the Hall of Champions, the Volcano of Lies, Embeddings, Chain of Thought, Lord Overfitting, AI Agents, and the way home.</p>
+  <p class="pw-text" style="font-size:14px;color:var(--text-dim);margin-bottom:24px">17 chapters · 19 illustrations · Tech deep-dives · Character map<br>One self-contained HTML file — works offline, forever yours.</p>
+  <a class="buy-btn lemonsqueezy-button" href="https://thehiddenlayers.lemonsqueezy.com/checkout/buy/f05930e5-dc31-411d-80a7-91aa27341e20?embed=1">
+    Unlock the Full Book — €4.99
+  </a>
+  <p class="pw-note">Instant download · No account needed · Read in any browser</p>
+</div>
+
+</div>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const chapters=document.querySelectorAll('.ch');
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('visible');});
+  },{threshold:0.15});
+  chapters.forEach(c=>io.observe(c));
+});
+</script>
+</body></html>
