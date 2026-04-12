@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hidden Layers — Where AI Becomes Adventure</title>
+<meta name="description" content="The first children's book that teaches AI through a fantasy adventure. Every character is a real AI concept. Read the story, and you'll have studied artificial intelligence.">
+<meta property="og:title" content="The Hidden Layers — Where AI Becomes Adventure">
+<meta property="og:description" content="The first children's book that teaches AI through a fantasy adventure.">
+<meta property="og:image" content="img/01_portal.jpg">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0a08;
+  --bg-warm: #141009;
+  --cream: #fdf8ed;
+  --cream-soft: #f5edda;
+  --gold: #c49a2a;
+  --gold-bright: #daa520;
+  --gold-pale: #e8d5a0;
+  --red: #9b2335;
+  --blue: #2d4a7a;
+  --ink: #1a1209;
+  --ink-soft: #5c4633;
+  --text-light: #d4c8b0;
+  --text-dim: #8a7d6b;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Lora', Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ═══════ HERO ═══════ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+  filter: brightness(0.7);
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(12,10,8,0.3) 0%,
+    rgba(12,10,8,0.1) 40%,
+    rgba(12,10,8,0.6) 70%,
+    rgba(12,10,8,1) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 60px 24px 80px;
+  max-width: 700px;
+}
+
+.hero-spark {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 16px;
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); filter: drop-shadow(0 0 20px rgba(218,165,32,0.6)); }
+}
+
+.hero h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(32px, 7vw, 62px);
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.1;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 40px rgba(0,0,0,0.8);
+}
+
+.hero .tagline {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(12px, 2.5vw, 17px);
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.hero .pitch {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(16px, 3vw, 21px);
+  color: var(--text-light);
+  line-height: 1.55;
+  margin-bottom: 36px;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 32px;
+  border-radius: 4px;
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.btn-gold:hover {
+  background: var(--gold-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(196,154,42,0.4);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--gold);
+  border: 1.5px solid var(--gold);
+}
+
+.btn-outline:hover {
+  background: rgba(196,154,42,0.1);
+  transform: translateY(-2px);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  color: var(--text-dim);
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  animation: bob 2s ease-in-out infinite;
+}
+
+.scroll-hint::after {
+  content: '↓';
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ═══════ SECTION: WHAT IS THIS ═══════ */
+.what {
+  padding: 80px 24px;
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.what h2 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(20px, 4vw, 30px);
+  color: var(--cream);
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+}
+
+.what p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.what .highlight {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.pillar {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(196,154,42,0.15);
+  border-radius: 8px;
+  padding: 28px 20px;
+  text-align: center;
+}
+
+.pillar-icon { font-size: 32px; margin-bottom: 12px; }
+
+.pillar h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  color: var(--gold);
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+
+.pillar p {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ═══════ STORY PREVIEW ═══════ */
+.story-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.story-img-wrap {
+  position: relative;
+  width: 100%;
+  max-height: 70vh;
+  overflow: hidden;
+}
+
+.story-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.story-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(12,10,8,0) 0%,
+    rgba(12,10,8,0) 50%,
+    rgba(12,10,8,1) 100%);
+}
+
+.story-text {
+  max-width: 680px;
+  margin: -60px auto 0;
+  padding: 0 24px 60px;
+  position: relative;
+  z-index: 1;
+}
+
+.story-text .ch-label {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.story-text h2 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(22px, 4.5vw, 32px);
+  color: var(--cream);
+  margin-bottom: 20px;
+  line-height: 1.25;
+}
+
+.story-text .prose {
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--text-light);
+}
+
+.story-text .prose p {
+  margin-bottom: 14px;
+}
+
+.story-text .prose p:first-of-type::first-letter {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 3em;
+  float: left;
+  line-height: 0.8;
+  margin: 5px 10px 0 0;
+  color: var(--red);
+}
+
+.story-text .prose .name {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 0.92em;
+  color: var(--gold);
+}
+
+.story-text .learn-box {
+  background: rgba(255,255,255,0.04);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 18px 20px;
+  margin-top: 24px;
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.story-text .learn-box .lbl {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  color: var(--gold);
+  font-size: 13px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.story-text .learn-box .kid {
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.divider {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--gold);
+  font-size: 16px;
+  letter-spacing: 14px;
+  opacity: 0.4;
+}
+
+/* ═══════ LOCKED / CTA ═══════ */
+.locked {
+  text-align: center;
+  padding: 80px 24px 100px;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.locked::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200%;
+  height: 160px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+}
+
+.locked .lock-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+
+.locked h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 26px;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+
+.locked p {
+  font-size: 17px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.locked .price-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.price-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(196,154,42,0.2);
+  border-radius: 10px;
+  padding: 24px 16px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.price-card:hover {
+  border-color: var(--gold);
+  background: rgba(196,154,42,0.05);
+  transform: translateY(-3px);
+}
+
+.price-card.featured {
+  border-color: var(--gold);
+  background: rgba(196,154,42,0.08);
+  position: relative;
+}
+
+.price-card.featured::before {
+  content: '★ MOST POPULAR';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold);
+  color: var(--ink);
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 3px 12px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.price-card .tier {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.price-card .price {
+  font-family: 'Cinzel', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+
+.price-card .price span {
+  font-size: 16px;
+  color: var(--text-dim);
+  font-weight: 400;
+}
+
+.price-card .desc {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* ═══════ NEWSLETTER ═══════ */
+.newsletter {
+  padding: 60px 24px 80px;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.newsletter h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+
+.newsletter p {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+}
+
+.newsletter form {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.newsletter input[type="email"] {
+  flex: 1;
+  min-width: 220px;
+  padding: 12px 16px;
+  border: 1.5px solid rgba(196,154,42,0.3);
+  border-radius: 4px;
+  background: rgba(255,255,255,0.04);
+  color: var(--cream);
+  font-family: 'Lora', serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.newsletter input[type="email"]:focus {
+  border-color: var(--gold);
+}
+
+.newsletter input[type="email"]::placeholder {
+  color: var(--text-dim);
+}
+
+/* ═══════ CHARACTERS ═══════ */
+.characters {
+  padding: 60px 24px 80px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.characters h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  text-align: center;
+  color: var(--cream);
+  margin-bottom: 32px;
+  letter-spacing: 2px;
+}
+
+.char-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.char-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(196,154,42,0.12);
+  border-radius: 8px;
+  padding: 16px 12px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.char-card:hover {
+  border-color: rgba(196,154,42,0.35);
+  transform: translateY(-2px);
+}
+
+.char-card .emoji { font-size: 28px; margin-bottom: 6px; }
+
+.char-card .char-name {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 3px;
+}
+
+.char-card .char-real {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+/* ═══════ FOOTER ═══════ */
+footer {
+  padding: 40px 24px;
+  text-align: center;
+  border-top: 1px solid rgba(196,154,42,0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+footer p {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+footer a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+footer a:hover { text-decoration: underline; }
+
+/* ═══════ ANIMATIONS ═══════ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════ RESPONSIVE ═══════ */
+@media (max-width: 640px) {
+  .pillars { grid-template-columns: 1fr; }
+  .locked .price-cards { grid-template-columns: 1fr; }
+  .story-text .prose { font-size: 17px; }
+  .hero-content { padding: 40px 20px 60px; }
+  .char-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="img/01_portal.jpg" alt="Aria reaches into a golden portal on her computer screen" loading="eager">
+  </div>
+  <div class="hero-content">
+    <span class="hero-spark">⚡</span>
+    <h1>The Hidden Layers</h1>
+    <div class="tagline">Where AI Becomes Adventure</div>
+    <p class="pitch">
+      The first children's book where every character is a real AI concept.<br>
+      Read the story. Learn how artificial intelligence actually works.<br>
+      <em>For ages 6–12 and every curious adult.</em>
+    </p>
+    <div class="hero-cta">
+      <a href="#read" class="btn btn-gold">Read Free Chapters</a>
+      <a href="#book" class="btn btn-outline">Get the Book</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll to explore</div>
+</section>
+
+<!-- ═══════════════ WHAT IS THIS ═══════════════ -->
+<section class="what fade-in">
+  <h2>Every Character Teaches Something Real</h2>
+  <p>
+    <span class="name" style="font-family:'Cinzel',serif; color:var(--gold); font-weight:600;">Aria Sparks</span> is eight years old and asks too many questions. One day, she falls through her computer screen into the <span class="highlight">Kingdom of the Hidden Layers</span> — a world made of light, where AI concepts are living, breathing characters.
+  </p>
+  <p>
+    A knight called <span class="highlight">Transformer</span> guides her through a quest to defeat <span class="highlight">Lord Overfitting</span>, the villain who memorises everything and understands nothing. Along the way, she meets the Seven Champions, discovers the three sacred objects, and learns why AI sometimes lies.
+  </p>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-icon">📖</div>
+      <h3>A Real Story</h3>
+      <p>Not a textbook. A fantasy adventure with a beginning, middle, and end.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🧠</div>
+      <h3>Real AI</h3>
+      <p>30+ concepts: Transformers, GPT, Claude, tokens, embeddings, RLHF, RAG, agents.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">👦</div>
+      <h3>Ages 6–106</h3>
+      <p>Simple enough for an 8-year-old. Technical enough for a parent who works in tech.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CHAPTER 1 ═══════════════ -->
+<div id="read"></div>
+<div class="divider">· · ✦ · ·</div>
+
+<section class="story-section fade-in">
+  <div class="story-img-wrap">
+    <img src="img/01_portal.jpg" alt="Aria reaches toward the golden portal" loading="lazy">
+  </div>
+  <div class="story-text">
+    <span class="ch-label">Chapter One</span>
+    <h2>The Girl Who Asked Too Many Questions</h2>
+    <div class="prose">
+      <p>Aria Sparks was the kind of girl who could not stop asking questions. She asked why the sky was blue at breakfast and why cats purr at dinner. She asked her teacher how calculators think, and when the teacher said "they just do," Aria frowned and said, <em>"That's not really an answer, is it?"</em></p>
+      <p>One rainy Tuesday, Aria was sitting at her computer, talking to an AI chatbot for a school project. She typed: <em>"How do you work?"</em></p>
+      <p>The screen flickered. The letters dissolved into gold dust. And before Aria could blink, the dust swirled into the shape of a door — a shimmering, glowing door — right there inside her screen.</p>
+      <p>A voice spoke from behind it. It was warm and calm, like a librarian who has all the time in the world.</p>
+      <p><em>"Nobody ever asks that,"</em> said the voice. <em>"Would you like to come in and see for yourself?"</em></p>
+      <p>Aria — being Aria — did not hesitate. She reached toward the screen. Her fingers went <em>through</em> it, like pushing through warm honey. And then she was falling, gently, like a leaf in autumn, into a kingdom made of light.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CHAPTER 2 ═══════════════ -->
+<section class="story-section fade-in">
+  <div class="story-img-wrap">
+    <img src="img/02_landscape.jpg" alt="Aria and Transformer overlook the Kingdom of Neuralia" loading="lazy">
+  </div>
+  <div class="story-text">
+    <span class="ch-label">Chapter Two</span>
+    <h2>The Kingdom of the Hidden Layers</h2>
+    <div class="prose">
+      <p>She landed softly on a hill of warm glass and looked around. What she saw took her breath away.</p>
+      <p>The kingdom stretched out in every direction — but it was not like any kingdom in her storybooks. There were no castles made of stone. Instead, there were millions of tiny glowing dots — like fireflies frozen in place — connected by thin golden threads. They pulsed with light, sending tiny sparks to each other. The dots were stacked in rows, layer upon layer, reaching up so high they disappeared into the clouds.</p>
+      <p>A figure stepped out from behind a pillar of light. He was tall and kind-looking, wearing silver armour and a golden helmet with a visor that glowed like a sunrise. He smiled.</p>
+      <p><em>"Those are <span class="name">neurons</span>,"</em> he said. <em>"The building blocks of this kingdom. Each one is very simple — it takes in a signal, decides how important it is, and passes it on. But together, millions of them? They can learn to understand almost anything."</em></p>
+      <p><em>"Who are you?"</em> asked Aria.</p>
+      <p><em>"My name is <span class="name">Transformer</span>,"</em> said the knight, <em>"and I am going to show you how everything works. But we must hurry. Something terrible is happening."</em></p>
+    </div>
+    <div class="learn-box">
+      <span class="lbl">🔍 What is it, really?</span>
+      <span class="kid">A neural network is millions of tiny "brain cells" connected by wires. Each cell receives a message, decides how important it is, and passes it to the next one. Stack enough of them in layers, and they can learn to recognise pictures, understand words, and write stories.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CHAPTER 3 ═══════════════ -->
+<section class="story-section fade-in">
+  <div class="story-img-wrap">
+    <img src="img/03_transformer.jpg" alt="Transformer reveals himself to Aria" loading="lazy">
+  </div>
+  <div class="story-text">
+    <span class="ch-label">Chapter Three</span>
+    <h2>The Knight Who Could See Everything at Once</h2>
+    <div class="prose">
+      <p>As they walked through glowing fields, Transformer explained why he was different from the warriors who came before him.</p>
+      <p><em>"Once upon a time, this kingdom was protected by the Recurrent Knights. They read sentences one word at a time, like reading a book through a keyhole. By the time they got to the end, they had forgotten the beginning."</em></p>
+      <p>He tapped his golden helmet. <em>"But I have <span class="name">the Eye of Attention</span>. When I lower this visor, I can see every word in a sentence at once. And I can tell which words are connected."</em></p>
+      <p>Aria grinned. <em>"Like having eight pairs of glasses, each showing something different?"</em></p>
+      <p>Transformer laughed. <em>"That is the best explanation I have ever heard."</em></p>
+    </div>
+    <div class="learn-box">
+      <span class="lbl">🔍 What is it, really?</span>
+      <span class="kid">Old AI models read one word at a time and forgot things. The Transformer looks at ALL the words at once and draws lines between the connected ones. It uses three questions per word — Query ("What do I need?"), Key ("What do I have?"), Value ("Here's my answer") — to decide what's important.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ LOCKED ═══════════════ -->
+<div class="divider">· · ✦ · ·</div>
+
+<section class="story-section fade-in" style="position:relative;">
+  <div class="story-img-wrap" style="max-height:50vh;">
+    <img src="img/04_attention.jpg" alt="The Attention mechanism visualized" loading="lazy" style="filter:blur(3px) brightness(0.4);">
+  </div>
+</section>
+
+<section class="locked fade-in" id="book">
+  <span class="lock-icon">🔒</span>
+  <h2>The Adventure Continues</h2>
+  <p>14 more chapters. The Hall of Champions, the Volcano of Lies, the Living Library, the battle against Lord Overfitting, and the most important lesson in all of AI.</p>
+
+  <div class="price-cards">
+    <div class="price-card">
+      <div class="tier">Digital</div>
+      <div class="price">€9<span>.99</span></div>
+      <div class="desc">Full ebook + interactive quiz app + audio companion</div>
+    </div>
+    <div class="price-card featured">
+      <div class="tier">Illustrated Book</div>
+      <div class="price">€29<span>.99</span></div>
+      <div class="desc">Hardcover illustrated edition + digital bundle + poster map</div>
+    </div>
+  </div>
+
+  <a href="#notify" class="btn btn-gold" style="width:100%; max-width:320px;">Notify Me at Launch</a>
+  <p style="font-size:13px; color:var(--text-dim); margin-top:12px;">Coming soon. Join the waitlist to get early access pricing.</p>
+</section>
+
+<!-- ═══════════════ CHARACTERS ═══════════════ -->
+<section class="characters fade-in">
+  <h2>Every Character Is Real</h2>
+  <div class="char-grid">
+    <div class="char-card"><div class="emoji">⚔️</div><div class="char-name">Transformer</div><div class="char-real">Transformer Architecture</div></div>
+    <div class="char-card"><div class="emoji">👁️</div><div class="char-name">Eye of Attention</div><div class="char-real">Self-Attention (Q,K,V)</div></div>
+    <div class="char-card"><div class="emoji">📖</div><div class="char-name">GPT the Bard</div><div class="char-real">GPT-4 / o1 / o3</div></div>
+    <div class="char-card"><div class="emoji">🛡️</div><div class="char-name">Claude the Honest</div><div class="char-real">Claude (Anthropic)</div></div>
+    <div class="char-card"><div class="emoji">♊</div><div class="char-name">Gemini Twins</div><div class="char-real">Gemini (Google)</div></div>
+    <div class="char-card"><div class="emoji">🦙</div><div class="char-name">LLaMA the Free</div><div class="char-real">LLaMA (Meta)</div></div>
+    <div class="char-card"><div class="emoji">🌪️</div><div class="char-name">Mistral the Wind</div><div class="char-real">Mixtral (MoE)</div></div>
+    <div class="char-card"><div class="emoji">🃏</div><div class="char-name">Grok the Jester</div><div class="char-real">Grok (xAI)</div></div>
+    <div class="char-card"><div class="emoji">🐉</div><div class="char-name">DeepSeek Dragon</div><div class="char-real">DeepSeek</div></div>
+    <div class="char-card"><div class="emoji">🪙</div><div class="char-name">Gold Coins</div><div class="char-real">Tokens (BPE)</div></div>
+    <div class="char-card"><div class="emoji">🪞</div><div class="char-name">Mirror of Loss</div><div class="char-real">Loss Function</div></div>
+    <div class="char-card"><div class="emoji">🧭</div><div class="char-name">Gradient Compass</div><div class="char-real">Gradient Descent</div></div>
+    <div class="char-card"><div class="emoji">🌋</div><div class="char-name">Volcano of Lies</div><div class="char-real">Hallucination</div></div>
+    <div class="char-card"><div class="emoji">🌲</div><div class="char-name">Living Library</div><div class="char-real">RAG</div></div>
+    <div class="char-card"><div class="emoji">💀</div><div class="char-name">Lord Overfitting</div><div class="char-real">Overfitting</div></div>
+    <div class="char-card"><div class="emoji">🗺️</div><div class="char-name">Map of Meaning</div><div class="char-real">Embeddings</div></div>
+    <div class="char-card"><div class="emoji">🌡️</div><div class="char-name">Dial of Temperature</div><div class="char-real">Temperature Sampling</div></div>
+    <div class="char-card"><div class="emoji">🤖</div><div class="char-name">The Agents</div><div class="char-real">AI Agents (ReAct)</div></div>
+  </div>
+</section>
+
+<!-- ═══════════════ NEWSLETTER ═══════════════ -->
+<section class="newsletter fade-in" id="notify">
+  <h3>Get Notified at Launch</h3>
+  <p>Join the waitlist. No spam — just launch day access and early pricing.</p>
+  <form action="#" onsubmit="handleSubmit(event)">
+    <input type="email" placeholder="your@email.com" required>
+    <button type="submit" class="btn btn-gold">Join Waitlist</button>
+  </form>
+  <p id="form-msg" style="margin-top:12px; display:none; color:var(--gold);">✓ You're on the list!</p>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <p style="font-family:'Cinzel',serif; color:var(--gold); font-size:11px; letter-spacing:3px; margin-bottom:12px;">THE HIDDEN LAYERS</p>
+  <p>A story for learning AI and never forgetting it.</p>
+  <p style="margin-top:12px;">© 2026 Hidden Artifice · <a href="mailto:hello@hiddenartifice.com">hello@hiddenartifice.com</a></p>
+</footer>
+
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Newsletter placeholder
+function handleSubmit(e) {
+  e.preventDefault();
+  const msg = document.getElementById('form-msg');
+  msg.style.display = 'block';
+  e.target.querySelector('input').value = '';
+  // TODO: Replace with Mailchimp/ConvertKit/Buttondown endpoint
+  // fetch('https://your-email-service.com/subscribe', {
+  //   method: 'POST',
+  //   body: JSON.stringify({ email: emailValue })
+  // });
+}
+</script>
+</body>
+</html>
